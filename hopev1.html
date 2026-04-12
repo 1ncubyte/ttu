@@ -1,0 +1,1358 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Heritage & Hope — Helen's Table</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Lora:ital,wght@0,400;0,500;1,400&family=Nunito:wght@300;400;600&display=swap" rel="stylesheet">
+
+<style>
+  :root {
+    --cream: #faf6f0;
+    --warm-white: #fffdf8;
+    --amber: #c8874a;
+    --amber-light: #e8a96a;
+    --amber-pale: #f5dfc0;
+    --brown: #6b4226;
+    --brown-dark: #3d2410;
+    --rose: #c97b7b;
+    --rose-pale: #f2e0df;
+    --sage: #7a9e7e;
+    --sage-pale: #deeee0;
+    --text: #3a2a1e;
+    --text-soft: #7a5c48;
+    --text-lighter: #a07860;
+    --gold: #d4a64a;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background-color: var(--cream);
+    color: var(--text);
+    font-family: 'Lora', Georgia, serif;
+    overflow-x: hidden;
+  }
+
+  /* ─── GRAIN OVERLAY ─── */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 1000;
+    opacity: 0.025;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+    background-repeat: repeat;
+    background-size: 128px;
+  }
+
+  /* ─── NAV ─── */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    padding: 18px 48px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: rgba(250, 246, 240, 0.88);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid rgba(200, 135, 74, 0.15);
+    transition: all 0.4s ease;
+  }
+
+  .nav-logo {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.25rem;
+    color: var(--brown);
+    letter-spacing: 0.02em;
+    text-decoration: none;
+  }
+
+  .nav-logo span { color: var(--amber); font-style: italic; }
+
+  .nav-links {
+    display: flex;
+    gap: 36px;
+    list-style: none;
+  }
+
+  .nav-links a {
+    font-family: 'Nunito', sans-serif;
+    font-size: 0.82rem;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--text-soft);
+    text-decoration: none;
+    transition: color 0.3s;
+  }
+
+  .nav-links a:hover { color: var(--amber); }
+
+  /* ─── HERO ─── */
+  .hero {
+    min-height: 100vh;
+    display: grid;
+    place-items: center;
+    position: relative;
+    overflow: hidden;
+    padding: 120px 32px 80px;
+    background: 
+      radial-gradient(ellipse 80% 60% at 20% 80%, rgba(200, 135, 74, 0.12) 0%, transparent 70%),
+      radial-gradient(ellipse 60% 50% at 80% 20%, rgba(201, 123, 123, 0.1) 0%, transparent 70%),
+      radial-gradient(ellipse 100% 80% at 50% 50%, rgba(122, 158, 126, 0.07) 0%, transparent 80%),
+      var(--warm-white);
+  }
+
+  .hero-decoration {
+    position: absolute;
+    pointer-events: none;
+  }
+
+  .dec-circle-1 {
+    width: 500px; height: 500px;
+    border-radius: 50%;
+    border: 1px solid rgba(200, 135, 74, 0.1);
+    top: -100px; right: -100px;
+    animation: slowSpin 40s linear infinite;
+  }
+
+  .dec-circle-2 {
+    width: 300px; height: 300px;
+    border-radius: 50%;
+    border: 1px solid rgba(201, 123, 123, 0.1);
+    bottom: 80px; left: -60px;
+    animation: slowSpin 30s linear infinite reverse;
+  }
+
+  @keyframes slowSpin {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+  }
+
+  .hero-inner {
+    text-align: center;
+    max-width: 780px;
+    position: relative;
+    animation: fadeUp 1.2s ease both;
+  }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(32px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .hero-eyebrow {
+    font-family: 'Nunito', sans-serif;
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--amber);
+    margin-bottom: 20px;
+    opacity: 0;
+    animation: fadeUp 1s ease 0.3s both;
+  }
+
+  .hero-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(3rem, 7vw, 5.5rem);
+    font-weight: 700;
+    line-height: 1.1;
+    color: var(--brown-dark);
+    margin-bottom: 24px;
+    opacity: 0;
+    animation: fadeUp 1s ease 0.5s both;
+  }
+
+  .hero-title em {
+    font-style: italic;
+    color: var(--amber);
+    display: block;
+  }
+
+  .hero-subtitle {
+    font-family: 'Lora', serif;
+    font-size: 1.15rem;
+    line-height: 1.8;
+    color: var(--text-soft);
+    max-width: 560px;
+    margin: 0 auto 40px;
+    opacity: 0;
+    animation: fadeUp 1s ease 0.7s both;
+  }
+
+  .hero-cta {
+    display: inline-flex;
+    gap: 16px;
+    flex-wrap: wrap;
+    justify-content: center;
+    opacity: 0;
+    animation: fadeUp 1s ease 0.9s both;
+  }
+
+  .btn {
+    padding: 14px 32px;
+    border-radius: 50px;
+    font-family: 'Nunito', sans-serif;
+    font-size: 0.85rem;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-decoration: none;
+    transition: all 0.35s ease;
+    cursor: pointer;
+    border: none;
+  }
+
+  .btn-primary {
+    background: var(--amber);
+    color: white;
+    box-shadow: 0 4px 20px rgba(200, 135, 74, 0.35);
+  }
+
+  .btn-primary:hover {
+    background: var(--brown);
+    box-shadow: 0 6px 28px rgba(107, 66, 38, 0.35);
+    transform: translateY(-2px);
+  }
+
+  .btn-outline {
+    background: transparent;
+    color: var(--brown);
+    border: 1.5px solid rgba(107, 66, 38, 0.3);
+  }
+
+  .btn-outline:hover {
+    border-color: var(--amber);
+    color: var(--amber);
+    transform: translateY(-2px);
+  }
+
+  /* ─── SCROLL HINT ─── */
+  .scroll-hint {
+    position: absolute;
+    bottom: 40px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    opacity: 0;
+    animation: fadeUp 1s ease 1.4s both;
+  }
+
+  .scroll-hint span {
+    font-family: 'Nunito', sans-serif;
+    font-size: 0.7rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--text-lighter);
+  }
+
+  .scroll-line {
+    width: 1px;
+    height: 48px;
+    background: linear-gradient(to bottom, var(--amber), transparent);
+    animation: scrollPulse 2s ease-in-out infinite;
+  }
+
+  @keyframes scrollPulse {
+    0%, 100% { opacity: 0.3; transform: scaleY(0.6); }
+    50% { opacity: 1; transform: scaleY(1); }
+  }
+
+  /* ─── SECTION WRAPPER ─── */
+  section {
+    padding: 100px 32px;
+    position: relative;
+  }
+
+  .container {
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+
+  .section-label {
+    font-family: 'Nunito', sans-serif;
+    font-size: 0.72rem;
+    font-weight: 600;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--amber);
+    margin-bottom: 16px;
+  }
+
+  .section-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2rem, 4vw, 3rem);
+    color: var(--brown-dark);
+    line-height: 1.2;
+    margin-bottom: 24px;
+  }
+
+  .section-title em { font-style: italic; color: var(--amber); }
+
+  .section-intro {
+    font-size: 1.05rem;
+    line-height: 1.85;
+    color: var(--text-soft);
+    max-width: 640px;
+  }
+
+  /* ─── GRANNY PORTRAIT SECTION ─── */
+  .granny-section {
+    background: var(--warm-white);
+    overflow: hidden;
+  }
+
+  .granny-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 80px;
+    align-items: center;
+  }
+
+  .granny-visual {
+    position: relative;
+  }
+
+  .portrait-frame {
+    width: 100%;
+    aspect-ratio: 3/4;
+    background: 
+      radial-gradient(ellipse at 40% 30%, rgba(200, 135, 74, 0.2) 0%, transparent 70%),
+      linear-gradient(135deg, var(--amber-pale) 0%, var(--rose-pale) 50%, var(--sage-pale) 100%);
+    border-radius: 12px 80px 12px 80px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    overflow: hidden;
+    box-shadow: 
+      0 20px 60px rgba(107, 66, 38, 0.1),
+      inset 0 0 40px rgba(255, 255, 255, 0.5);
+  }
+
+  .portrait-placeholder {
+    text-align: center;
+    padding: 32px;
+  }
+
+  .portrait-placeholder .portrait-icon {
+    font-size: 5rem;
+    display: block;
+    margin-bottom: 12px;
+    filter: drop-shadow(0 4px 8px rgba(107, 66, 38, 0.2));
+  }
+
+  .portrait-placeholder p {
+    font-family: 'Playfair Display', serif;
+    font-style: italic;
+    font-size: 1rem;
+    color: var(--brown);
+    opacity: 0.7;
+  }
+
+  .portrait-badge {
+    position: absolute;
+    bottom: -20px;
+    right: -20px;
+    width: 110px; height: 110px;
+    border-radius: 50%;
+    background: var(--amber);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 8px 24px rgba(200, 135, 74, 0.4);
+    text-align: center;
+  }
+
+  .portrait-badge span:first-child {
+    font-size: 1.6rem;
+  }
+
+  .portrait-badge span:last-child {
+    font-family: 'Playfair Display', serif;
+    font-style: italic;
+    font-size: 0.65rem;
+    color: white;
+    line-height: 1.3;
+    padding: 0 8px;
+  }
+
+  .granny-text blockquote {
+    font-family: 'Playfair Display', serif;
+    font-style: italic;
+    font-size: 1.4rem;
+    line-height: 1.6;
+    color: var(--brown);
+    border-left: 3px solid var(--amber);
+    padding-left: 24px;
+    margin: 32px 0;
+  }
+
+  /* ─── RECIPE CARDS ─── */
+  .recipes-section {
+    background: 
+      radial-gradient(ellipse 80% 60% at 90% 10%, rgba(201, 123, 123, 0.08) 0%, transparent 60%),
+      var(--cream);
+  }
+
+  .recipes-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    margin-bottom: 56px;
+    flex-wrap: wrap;
+    gap: 24px;
+  }
+
+  .recipe-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 28px;
+  }
+
+  .recipe-card {
+    background: var(--warm-white);
+    border-radius: 20px;
+    overflow: hidden;
+    transition: transform 0.4s ease, box-shadow 0.4s ease;
+    cursor: pointer;
+    box-shadow: 0 2px 16px rgba(107, 66, 38, 0.06);
+  }
+
+  .recipe-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 16px 48px rgba(107, 66, 38, 0.12);
+  }
+
+  .recipe-card:first-child {
+    grid-column: span 2;
+  }
+
+  .recipe-thumb {
+    height: 220px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 4rem;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .recipe-card:first-child .recipe-thumb { height: 280px; }
+
+  .recipe-thumb-1 { background: linear-gradient(135deg, #f5dfc0, #e8c9a0); }
+  .recipe-thumb-2 { background: linear-gradient(135deg, #f2e0df, #e8c0c0); }
+  .recipe-thumb-3 { background: linear-gradient(135deg, #deeee0, #c8deca); }
+  .recipe-thumb-4 { background: linear-gradient(135deg, #fef3d0, #f0e0a0); }
+
+  .recipe-tag {
+    position: absolute;
+    top: 16px; left: 16px;
+    padding: 5px 12px;
+    background: rgba(255,255,255,0.85);
+    backdrop-filter: blur(4px);
+    border-radius: 20px;
+    font-family: 'Nunito', sans-serif;
+    font-size: 0.68rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--brown);
+  }
+
+  .recipe-body {
+    padding: 24px;
+  }
+
+  .recipe-body h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.2rem;
+    color: var(--brown-dark);
+    margin-bottom: 8px;
+  }
+
+  .recipe-body p {
+    font-size: 0.88rem;
+    line-height: 1.7;
+    color: var(--text-soft);
+    margin-bottom: 16px;
+  }
+
+  .recipe-story-peek {
+    font-family: 'Lora', serif;
+    font-style: italic;
+    font-size: 0.82rem;
+    color: var(--amber);
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+
+  /* ─── VALUES / PILLARS ─── */
+  .pillars-section {
+    background: var(--brown-dark);
+    color: white;
+  }
+
+  .pillars-section .section-title {
+    color: var(--amber-pale);
+  }
+
+  .pillars-section .section-intro {
+    color: rgba(255,255,255,0.65);
+  }
+
+  .pillars-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 40px;
+    margin-top: 64px;
+  }
+
+  .pillar {
+    text-align: center;
+    padding: 48px 32px;
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(200, 135, 74, 0.15);
+    border-radius: 20px;
+    transition: all 0.4s ease;
+  }
+
+  .pillar:hover {
+    background: rgba(200, 135, 74, 0.08);
+    border-color: rgba(200, 135, 74, 0.4);
+    transform: translateY(-4px);
+  }
+
+  .pillar-icon {
+    font-size: 2.5rem;
+    margin-bottom: 20px;
+    display: block;
+  }
+
+  .pillar h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.35rem;
+    color: var(--amber-light);
+    margin-bottom: 12px;
+  }
+
+  .pillar p {
+    font-size: 0.9rem;
+    line-height: 1.8;
+    color: rgba(255,255,255,0.55);
+  }
+
+  /* ─── STORIES / HERITAGE ─── */
+  .stories-section {
+    background: var(--warm-white);
+  }
+
+  .stories-grid {
+    display: grid;
+    grid-template-columns: 1.4fr 1fr;
+    gap: 48px;
+    margin-top: 56px;
+  }
+
+  .story-featured {
+    background: var(--cream);
+    border-radius: 24px;
+    padding: 48px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .story-featured::before {
+    content: '"';
+    font-family: 'Playfair Display', serif;
+    font-size: 14rem;
+    color: var(--amber);
+    opacity: 0.06;
+    position: absolute;
+    top: -40px; left: 20px;
+    line-height: 1;
+    pointer-events: none;
+  }
+
+  .story-featured .story-tag {
+    font-family: 'Nunito', sans-serif;
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--amber);
+    margin-bottom: 16px;
+    display: block;
+  }
+
+  .story-featured h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.7rem;
+    color: var(--brown-dark);
+    line-height: 1.3;
+    margin-bottom: 16px;
+  }
+
+  .story-featured p {
+    font-size: 0.95rem;
+    line-height: 1.85;
+    color: var(--text-soft);
+    margin-bottom: 24px;
+  }
+
+  .story-list {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  .story-mini {
+    background: var(--cream);
+    border-radius: 16px;
+    padding: 24px;
+    display: flex;
+    gap: 16px;
+    align-items: flex-start;
+    transition: all 0.3s ease;
+    cursor: pointer;
+  }
+
+  .story-mini:hover {
+    background: var(--amber-pale);
+  }
+
+  .story-mini-icon {
+    font-size: 1.8rem;
+    flex-shrink: 0;
+    width: 48px;
+    height: 48px;
+    background: white;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 2px 8px rgba(107, 66, 38, 0.08);
+  }
+
+  .story-mini-text span {
+    font-family: 'Nunito', sans-serif;
+    font-size: 0.68rem;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--amber);
+    display: block;
+    margin-bottom: 4px;
+  }
+
+  .story-mini-text h4 {
+    font-family: 'Playfair Display', serif;
+    font-size: 0.98rem;
+    color: var(--brown-dark);
+    margin-bottom: 4px;
+  }
+
+  .story-mini-text p {
+    font-size: 0.82rem;
+    color: var(--text-soft);
+    line-height: 1.5;
+  }
+
+  /* ─── GLOBAL REACH ─── */
+  .reach-section {
+    background: 
+      radial-gradient(ellipse at 15% 50%, rgba(122, 158, 126, 0.12) 0%, transparent 60%),
+      radial-gradient(ellipse at 85% 30%, rgba(200, 135, 74, 0.1) 0%, transparent 60%),
+      var(--cream);
+    text-align: center;
+  }
+
+  .reach-section .section-title { text-align: center; }
+  .reach-section .section-intro { margin: 0 auto 64px; text-align: center; }
+
+  .regions-ring {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px;
+    max-width: 700px;
+    margin: 0 auto;
+  }
+
+  .region-pill {
+    padding: 12px 28px;
+    background: var(--warm-white);
+    border: 1.5px solid rgba(200, 135, 74, 0.2);
+    border-radius: 50px;
+    font-family: 'Nunito', sans-serif;
+    font-size: 0.82rem;
+    font-weight: 600;
+    color: var(--brown);
+    letter-spacing: 0.06em;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    transition: all 0.3s ease;
+    cursor: default;
+  }
+
+  .region-pill:hover {
+    background: var(--amber-pale);
+    border-color: var(--amber);
+    transform: scale(1.04);
+  }
+
+  .region-pill.home {
+    background: var(--amber);
+    border-color: var(--amber);
+    color: white;
+    font-size: 0.9rem;
+    box-shadow: 0 4px 16px rgba(200, 135, 74, 0.35);
+  }
+
+  /* ─── COMMUNITY INVITE ─── */
+  .community-section {
+    background: linear-gradient(135deg, var(--rose-pale) 0%, var(--amber-pale) 50%, var(--sage-pale) 100%);
+    text-align: center;
+  }
+
+  .community-inner {
+    max-width: 700px;
+    margin: 0 auto;
+  }
+
+  .community-inner .section-title { text-align: center; }
+
+  .community-text {
+    font-size: 1.05rem;
+    line-height: 1.85;
+    color: var(--text-soft);
+    margin-bottom: 16px;
+  }
+
+  .community-poem {
+    font-family: 'Playfair Display', serif;
+    font-style: italic;
+    font-size: 1.15rem;
+    line-height: 2;
+    color: var(--brown);
+    padding: 40px;
+    background: rgba(255,255,255,0.5);
+    border-radius: 20px;
+    margin: 40px 0;
+    position: relative;
+  }
+
+  .community-poem::before,
+  .community-poem::after {
+    content: '✦';
+    display: block;
+    font-style: normal;
+    font-size: 0.8rem;
+    color: var(--amber);
+    margin-bottom: 12px;
+  }
+
+  .community-poem::after {
+    margin-bottom: 0;
+    margin-top: 12px;
+  }
+
+  /* ─── NEWSLETTER / CONNECT ─── */
+  .connect-bar {
+    background: var(--amber);
+    padding: 60px 32px;
+    text-align: center;
+  }
+
+  .connect-bar h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.8rem;
+    color: white;
+    margin-bottom: 8px;
+  }
+
+  .connect-bar p {
+    font-size: 0.95rem;
+    color: rgba(255,255,255,0.8);
+    margin-bottom: 28px;
+  }
+
+  .email-form {
+    display: flex;
+    max-width: 440px;
+    margin: 0 auto;
+    gap: 0;
+    border-radius: 50px;
+    overflow: hidden;
+    box-shadow: 0 8px 32px rgba(107, 66, 38, 0.2);
+  }
+
+  .email-form input {
+    flex: 1;
+    padding: 16px 24px;
+    border: none;
+    outline: none;
+    font-family: 'Nunito', sans-serif;
+    font-size: 0.9rem;
+    background: white;
+    color: var(--text);
+  }
+
+  .email-form input::placeholder { color: #aaa; }
+
+  .email-form button {
+    padding: 16px 28px;
+    background: var(--brown-dark);
+    color: white;
+    border: none;
+    cursor: pointer;
+    font-family: 'Nunito', sans-serif;
+    font-size: 0.82rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    transition: background 0.3s;
+  }
+
+  .email-form button:hover { background: var(--brown); }
+
+  /* ─── FOOTER ─── */
+  footer {
+    background: var(--brown-dark);
+    padding: 64px 32px 32px;
+    color: rgba(255,255,255,0.5);
+  }
+
+  .footer-grid {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr;
+    gap: 64px;
+    margin-bottom: 48px;
+  }
+
+  .footer-brand h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.5rem;
+    color: var(--amber-light);
+    margin-bottom: 12px;
+  }
+
+  .footer-brand p {
+    font-size: 0.88rem;
+    line-height: 1.8;
+    max-width: 320px;
+  }
+
+  .footer-brand .footer-tagline {
+    font-family: 'Playfair Display', serif;
+    font-style: italic;
+    font-size: 0.95rem;
+    color: rgba(255,255,255,0.35);
+    margin-top: 20px;
+    padding-top: 20px;
+    border-top: 1px solid rgba(255,255,255,0.08);
+  }
+
+  .footer-col h4 {
+    font-family: 'Nunito', sans-serif;
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--amber-light);
+    margin-bottom: 20px;
+  }
+
+  .footer-col ul { list-style: none; }
+  .footer-col li { margin-bottom: 10px; }
+  .footer-col a {
+    text-decoration: none;
+    font-size: 0.88rem;
+    color: rgba(255,255,255,0.45);
+    transition: color 0.3s;
+  }
+  .footer-col a:hover { color: var(--amber-light); }
+
+  .footer-bottom {
+    border-top: 1px solid rgba(255,255,255,0.06);
+    padding-top: 24px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 12px;
+    font-size: 0.78rem;
+  }
+
+  .footer-bottom .heart { color: var(--rose); }
+
+  /* ─── DECORATIVE DIVIDERS ─── */
+  .divider {
+    text-align: center;
+    padding: 8px;
+    color: var(--amber);
+    font-size: 1rem;
+    letter-spacing: 0.5em;
+    opacity: 0.4;
+  }
+
+  /* ─── SCROLL ANIMATION ─── */
+  .reveal {
+    opacity: 0;
+    transform: translateY(24px);
+    transition: opacity 0.8s ease, transform 0.8s ease;
+  }
+
+  .reveal.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* ─── RESPONSIVE ─── */
+  @media (max-width: 768px) {
+    nav { padding: 16px 20px; }
+    .nav-links { display: none; }
+    section { padding: 72px 20px; }
+    .granny-grid { grid-template-columns: 1fr; gap: 48px; }
+    .recipe-grid { grid-template-columns: 1fr; }
+    .recipe-card:first-child { grid-column: span 1; }
+    .pillars-grid { grid-template-columns: 1fr; }
+    .stories-grid { grid-template-columns: 1fr; }
+    .footer-grid { grid-template-columns: 1fr; gap: 32px; }
+    .footer-bottom { flex-direction: column; text-align: center; }
+  }
+</style>
+
+</head>
+<body>
+
+<!-- NAV -->
+
+<nav>
+  <a href="#" class="nav-logo">Heritage <span>& Hope</span></a>
+  <ul class="nav-links">
+    <li><a href="#roots">Our Roots</a></li>
+    <li><a href="#recipes">Helen's Kitchen</a></li>
+    <li><a href="#stories">Stories</a></li>
+    <li><a href="#art">Art & Culture</a></li>
+    <li><a href="#community">Community</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+
+<section class="hero" id="home">
+  <div class="hero-decoration dec-circle-1"></div>
+  <div class="hero-decoration dec-circle-2"></div>
+
+  <div class="hero-inner">
+    <p class="hero-eyebrow">✦ &nbsp; Roots · Recipes · Belonging · Hope &nbsp; ✦</p>
+    <h1 class="hero-title">
+      Where Heritage<br>
+      <em>is Honoured</em>
+    </h1>
+    <p class="hero-subtitle">
+      Stories baked into every recipe. Culture carried across every ocean. 
+      A place to come home to — wherever home now lives.
+    </p>
+    <div class="hero-cta">
+      <a href="#roots" class="btn btn-primary">Meet Helen</a>
+      <a href="#recipes" class="btn btn-outline">Her Recipe Book</a>
+    </div>
+  </div>
+
+  <div class="scroll-hint">
+    <span>Begin</span>
+    <div class="scroll-line"></div>
+  </div>
+</section>
+
+<!-- GRANNY SECTION -->
+
+<section class="granny-section" id="roots">
+  <div class="container">
+    <div class="granny-grid">
+      <div class="granny-visual reveal">
+        <div class="portrait-frame">
+          <div class="portrait-placeholder">
+            <span class="portrait-icon">👵🏽</span>
+            <p>Helen Hope Hendrickse</p>
+          </div>
+        </div>
+        <div class="portrait-badge">
+          <span>🍰</span>
+          <span>Her Hands. Her Heart.</span>
+        </div>
+      </div>
+
+```
+  <div class="granny-text reveal">
+    <p class="section-label">✦ The Heart of It All</p>
+    <h2 class="section-title">Helen Hope<br><em>Hendrickse</em></h2>
+    <p class="section-intro">
+      She was the kind of woman who filled rooms without raising her voice. 
+      Whose kitchen always smelled of something promising. Whose hands 
+      knew instinctively how much was enough — of spice, of love, of patience.
+    </p>
+    <blockquote>
+      "She didn't just cook for us. She told us who we were — 
+      one recipe at a time."
+    </blockquote>
+    <p class="section-intro">
+      This space is built around her recipe book — but the recipes are just 
+      the beginning. Each one carries a story. Each story carries us forward. 
+      This is her gift, now shared with the world.
+    </p>
+    <br>
+    <a href="#recipes" class="btn btn-primary">Open the Recipe Book</a>
+  </div>
+</div>
+```
+
+  </div>
+</section>
+
+<!-- RECIPES -->
+
+<section class="recipes-section" id="recipes">
+  <div class="container">
+    <div class="recipes-header reveal">
+      <div>
+        <p class="section-label">✦ Helen's Kitchen</p>
+        <h2 class="section-title">Recipes with<br><em>Stories Inside</em></h2>
+      </div>
+      <a href="#" class="btn btn-outline">All Recipes →</a>
+    </div>
+
+```
+<div class="recipe-grid">
+  <div class="recipe-card reveal">
+    <div class="recipe-thumb recipe-thumb-1">
+      🍰
+      <span class="recipe-tag">Preserves</span>
+    </div>
+    <div class="recipe-body">
+      <h3>Helen's Apricot Jam</h3>
+      <p>Made every January without fail. The smell of it still takes us straight back to her kitchen in the late summer heat.</p>
+      <span class="recipe-story-peek">📖 Read the story behind this recipe →</span>
+    </div>
+  </div>
+
+  <div class="recipe-card reveal">
+    <div class="recipe-thumb recipe-thumb-2">
+      🫙
+      <span class="recipe-tag">Baking</span>
+    </div>
+    <div class="recipe-body">
+      <h3>Koeksisters</h3>
+      <p>A Cape Malay tradition twisted into something entirely her own. Sticky, golden, irreplaceable.</p>
+      <span class="recipe-story-peek">📖 Read the story →</span>
+    </div>
+  </div>
+
+  <div class="recipe-card reveal">
+    <div class="recipe-thumb recipe-thumb-3">
+      🫘
+      <span class="recipe-tag">Heritage</span>
+    </div>
+    <div class="recipe-body">
+      <h3>Waterblommetjie Bredie</h3>
+      <p>A slow stew from the Western Cape. Patience in every pot. The kind of dish that asks you to sit down and stay awhile.</p>
+      <span class="recipe-story-peek">📖 Read the story →</span>
+    </div>
+  </div>
+
+  <div class="recipe-card reveal">
+    <div class="recipe-thumb recipe-thumb-4">
+      🍪
+      <span class="recipe-tag">Sunday Ritual</span>
+    </div>
+    <div class="recipe-body">
+      <h3>Melktert</h3>
+      <p>Sunday afternoons. A cup of rooibos. And always, without question, a slice of this.</p>
+      <span class="recipe-story-peek">📖 Read the story →</span>
+    </div>
+  </div>
+</div>
+```
+
+  </div>
+</section>
+
+<!-- PILLARS -->
+
+<section class="pillars-section">
+  <div class="container">
+    <div style="text-align:center; max-width: 600px; margin: 0 auto;" class="reveal">
+      <p class="section-label" style="color: var(--amber-light);">✦ What We Stand For</p>
+      <h2 class="section-title">Three Simple<br><em>Things</em></h2>
+      <p class="section-intro">
+        Not performance. Not perfection. Just real people, building meaning together.
+      </p>
+    </div>
+
+```
+<div class="pillars-grid">
+  <div class="pillar reveal">
+    <span class="pillar-icon">🌱</span>
+    <h3>Contribution</h3>
+    <p>Every recipe shared. Every story told. Every painting displayed. Each one is a gift given freely — to community, to memory, to what comes next.</p>
+  </div>
+  <div class="pillar reveal">
+    <span class="pillar-icon">🤝</span>
+    <h3>Collaboration</h3>
+    <p>South African artists in London. Cooks in Auckland. Dreamers in Johannesburg. When we reach across, we grow larger than any single story.</p>
+  </div>
+  <div class="pillar reveal">
+    <span class="pillar-icon">💬</span>
+    <h3>Conversation</h3>
+    <p>The table is always set. Pull up a chair. Ask questions. Share what you carry. This is a space where heritage becomes dialogue.</p>
+  </div>
+</div>
+```
+
+  </div>
+</section>
+
+<!-- STORIES -->
+
+<section class="stories-section" id="stories">
+  <div class="container">
+    <div class="reveal">
+      <p class="section-label">✦ Stories & Heritage</p>
+      <h2 class="section-title">What We<br><em>Carry Forward</em></h2>
+    </div>
+
+```
+<div class="stories-grid">
+  <div class="story-featured reveal">
+    <span class="story-tag">Featured Story</span>
+    <h3>The Garden, the Jars, and What She Kept</h3>
+    <p>
+      Helen grew up in a time when you preserved everything — not from scarcity, 
+      but from care. The rows of gleaming jars in her pantry weren't just food stores. 
+      They were acts of love made visible. A declaration: <em>we will be alright.</em>
+    </p>
+    <p>
+      That instinct — to preserve, to hold, to make ready for others — 
+      runs through everything Heritage & Hope is becoming.
+    </p>
+    <a href="#" class="btn btn-outline">Read the full story →</a>
+  </div>
+
+  <div class="story-list">
+    <div class="story-mini reveal">
+      <div class="story-mini-icon">🎨</div>
+      <div class="story-mini-text">
+        <span>Art & Culture</span>
+        <h4>Painting Home from 10,000 Miles Away</h4>
+        <p>A South African artist in Berlin finds her palette shifting toward nostalgia.</p>
+      </div>
+    </div>
+
+    <div class="story-mini reveal">
+      <div class="story-mini-icon">🌍</div>
+      <div class="story-mini-text">
+        <span>Diaspora</span>
+        <h4>Braai on a British Balcony</h4>
+        <p>How South Africans in the UK hold onto something essential, something smoky and warm.</p>
+      </div>
+    </div>
+
+    <div class="story-mini reveal">
+      <div class="story-mini-icon">📚</div>
+      <div class="story-mini-text">
+        <span>Memory</span>
+        <h4>The Handwriting in Her Recipe Book</h4>
+        <p>Smudged ink, crossed-out measurements, and notes that say "just enough."</p>
+      </div>
+    </div>
+
+    <div class="story-mini reveal">
+      <div class="story-mini-icon">🎶</div>
+      <div class="story-mini-text">
+        <span>Music & Culture</span>
+        <h4>Songs at the Table</h4>
+        <p>The music that played while she cooked. The songs that carry us back.</p>
+      </div>
+    </div>
+  </div>
+</div>
+```
+
+  </div>
+</section>
+
+<!-- GLOBAL REACH -->
+
+<section class="reach-section" id="art">
+  <div class="container">
+    <div class="reveal">
+      <p class="section-label">✦ South African Souls, Worldwide</p>
+      <h2 class="section-title">One Roots,<br><em>Many Branches</em></h2>
+      <p class="section-intro">
+        Heritage & Hope reaches toward every corner where South African creativity, 
+        culture, and spirit have taken hold — celebrating art, food, story and belonging 
+        wherever it flowers.
+      </p>
+    </div>
+
+```
+<div class="regions-ring reveal">
+  <div class="region-pill home">🇿🇦 South Africa</div>
+  <div class="region-pill">🇬🇧 United Kingdom</div>
+  <div class="region-pill">🇳🇱 Netherlands</div>
+  <div class="region-pill">🇩🇪 Germany</div>
+  <div class="region-pill">🇦🇺 Australia</div>
+  <div class="region-pill">🇳🇿 New Zealand</div>
+  <div class="region-pill">🇸🇬 Singapore</div>
+  <div class="region-pill">🇺🇸 United States</div>
+  <div class="region-pill">🇨🇦 Canada</div>
+  <div class="region-pill">🌍 And Everywhere</div>
+</div>
+
+<div style="text-align:center; margin-top: 56px;" class="reveal">
+  <p style="font-family:'Playfair Display',serif; font-style:italic; font-size:1.1rem; color:var(--brown); margin-bottom:24px;">
+    Are you a South African artist, maker, or storyteller living abroad?
+  </p>
+  <a href="#community" class="btn btn-primary">Share Your Work With Us</a>
+</div>
+```
+
+  </div>
+</section>
+
+<!-- COMMUNITY -->
+
+<section class="community-section" id="community">
+  <div class="container">
+    <div class="community-inner">
+      <div class="reveal">
+        <p class="section-label">✦ An Open Door</p>
+        <h2 class="section-title">You're Welcome<br><em>Here</em></h2>
+      </div>
+
+```
+  <div class="community-poem reveal">
+    Heritage & Hope begins with a simple idea:<br><br>
+    That where we come from matters.<br>
+    That stories still shape us.<br>
+    That hope grows best when it's shared.<br><br>
+    This is a space for reflection, creativity, and community.<br><br>
+    <strong>Welcome.</strong>
+  </div>
+
+  <p class="community-text reveal">
+    Heritage & Hope is a community-led initiative rooted in culture, creativity, 
+    and shared human stories. We explore where we come from, what we carry forward, 
+    and how we create meaning — through storytelling, creative projects, 
+    conversations, and collaborations.
+  </p>
+
+  <p class="community-text reveal">
+    This space is for people who value connection over noise, 
+    contribution over extraction, and hope grounded in real heritage — not trends.
+  </p>
+
+  <div class="reveal" style="margin-top: 40px;">
+    <a href="#" class="btn btn-primary" style="margin-right:12px;">Find Us on Facebook</a>
+    <a href="#" class="btn btn-outline">Get in Touch</a>
+  </div>
+</div>
+```
+
+  </div>
+</section>
+
+<!-- CONNECT BAR -->
+
+<div class="connect-bar">
+  <div class="container">
+    <h2>Stay Close to the Table</h2>
+    <p>New recipes, stories and community moments — gently delivered, never rushed.</p>
+    <div class="email-form">
+      <input type="email" placeholder="Your email address">
+      <button type="button">Join Us</button>
+    </div>
+  </div>
+</div>
+
+<!-- FOOTER -->
+
+<footer>
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <h3>Heritage & Hope</h3>
+        <p>Stories, culture, and creative work rooted in heritage — growing hope through community. Rooted in South Africa. Reaching to the world.</p>
+        <p class="footer-tagline">"Where heritage is honoured, stories are shared, and hope is cultivated — together."</p>
+      </div>
+
+```
+  <div class="footer-col">
+    <h4>Explore</h4>
+    <ul>
+      <li><a href="#roots">Our Roots</a></li>
+      <li><a href="#recipes">Helen's Kitchen</a></li>
+      <li><a href="#stories">Stories</a></li>
+      <li><a href="#art">Art & Culture</a></li>
+      <li><a href="#community">Community</a></li>
+    </ul>
+  </div>
+
+  <div class="footer-col">
+    <h4>Connect</h4>
+    <ul>
+      <li><a href="#">Facebook Page</a></li>
+      <li><a href="#">Instagram</a></li>
+      <li><a href="#">Share Your Story</a></li>
+      <li><a href="#">Collaborate</a></li>
+      <li><a href="#">Contact</a></li>
+    </ul>
+  </div>
+</div>
+
+<div class="footer-bottom">
+  <span>© 2025 Heritage & Hope. Made with <span class="heart">♥</span> for Helen.</span>
+  <span>For South Africans everywhere, and all who love them.</span>
+</div>
+```
+
+  </div>
+</footer>
+
+<script>
+  // Scroll reveal
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(el => {
+      if (el.isIntersecting) {
+        el.target.classList.add('visible');
+      }
+    });
+  }, { threshold: 0.12 });
+
+  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+  // Stagger sibling reveals
+  document.querySelectorAll('.pillars-grid, .recipe-grid, .regions-ring, .story-list').forEach(grid => {
+    grid.querySelectorAll('.reveal').forEach((child, i) => {
+      child.style.transitionDelay = `${i * 0.12}s`;
+    });
+  });
+</script>
+
+</body>
+</html>
